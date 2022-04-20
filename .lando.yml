@@ -1,0 +1,4 @@
+name: ids
+recipe: wordpress
+config:
+  webroot: .
