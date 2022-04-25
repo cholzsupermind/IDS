@@ -28,42 +28,29 @@ if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 
 //Get all data from details ONLY array
 $fullStudies = $body['FullStudiesResponse']['FullStudies'];
-
 ?>
-
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <div class="entry-content">
     <h2><?=get_the_title(); ?></h2>
 
 
-
-<table style='font-size: 12px; max-width: 98%; margin: 0px 20px;'>
-    <tr>
-        <th>Rank</th>
-        <th>NCT ID</th>
-        <th>Study ID</th>
-        <th>Organization</th>
-        <th>Official Title</th>
-        <th>Status Verified Date</th>
-        <th>Overall Status</th>
-    </tr>
-    
 <?php
-foreach($fullStudies as $fullStudy)
-{
-    echo '<tr>';
-    echo '<td>' . $fullStudy['Rank'] . '</td>';
-    echo '<td>' . $fullStudy['Study']['ProtocolSection']['IdentificationModule']['NCTId'] . '</td>';
-    echo '<td>' . $fullStudy['Study']['ProtocolSection']['IdentificationModule']['OrgStudyIdInfo']['OrgStudyId'] . '</td>';
-    echo '<td>' . $fullStudy['Study']['ProtocolSection']['IdentificationModule']['Organization']['OrgFullName'] . '</td>';
-    echo '<td>' . $fullStudy['Study']['ProtocolSection']['IdentificationModule']['OfficialTitle'] . '</td>';
-    echo '<td>' . $fullStudy['Study']['ProtocolSection']['StatusModule']['StatusVerifiedDate'] . '</td>';
-    echo '<td>' . $fullStudy['Study']['ProtocolSection']['StatusModule']['OverallStatus'] . '</td>';
-    echo '</tr>';
-}
+    //Bring over API data assembly function
+    include('fullStudiesAPI.php');
+    $results = fullStudiesAPI($fullStudies);
+    
+    foreach($results as $result)
+    {
+        echo "<div style='font-size: 12px;'>";
+        foreach($result as $key => $value)
+        {
+            echo '<span>' . $key . ' : ' . $value . '</span><br />';
+        }
+        echo '<hr /></div>';
+    }
 ?>
-</table>
+
 </div><!-- .entry-content -->
 </article>
 
