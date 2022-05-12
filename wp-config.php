@@ -1,4 +1,12 @@
 <?php
+
+// AWS
+define( 'AS3CF_SETTINGS', serialize( array(
+    'provider' => 'aws',
+    'access-key-id' => 'AKIARIYMDZBXIDMARB4P',
+    'secret-access-key' => '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',
+) ) );
+
 /**
  * The base configuration for WordPress
  *

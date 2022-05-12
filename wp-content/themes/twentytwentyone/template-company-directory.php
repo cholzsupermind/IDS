@@ -11,77 +11,118 @@ get_header();
     <h2><?=get_the_title(); ?></h2>
 
 <?php
-    $companiesArray =
-    [
-        "aiontherapeutic.com",
-        "albertlabs.com",
-        "algernonpharmaceuticals.com",
-        "allied.health",
-        "atai.life",
-        "awaknlifesciences.com",
-        "betterplantsciences.com",
-        "abetterlifepharma.com",
-        "braxiascientific.com",
-        "brightmindsbio.com",
-        "captiva-verde.com",
-        "clearmindmedicine.com",
-        "codebase.ventures",
-        "compasspathways.com",
-        "core1labs.com",
-        "cresopharma.com",
-        "curepharmaceutical.com",
-        "cybin.com",
-        "deliccorp.com",
-        "theramedhealthcorp.com",
-        "ehave.com",
-        "empowerclinics.com",
-        "entheonbiomedical.com",
-        "enveric.com",
-        "meetfieldtrip.com",
-        "filament.health",
-        "ghres.com",
-        "globaltracsolutions.com",
-        "goodnessgrowth.com",
-        "graphblockchain.com",
-        "havnlife.com",
-        "hollistercannabisco.com",
-        "ketamine.one",
-        "latticebiologics.com",
-        "leviteelabs.com",
-        "lobesciences.com",
-        "magicmedindustries.com",
-        "mindcure.com",
-        "mindmed.co",
-        "mindsetpharma.com",
-        "mydecine.com",
-        "neonmindbiosciences.com",
-        "newwavecorp.com",
-        "novamentis.ca",
-        "novamind.ca",
-        "numinus.ca",
-        "nutritionalhigh.com",
-        "optimihealth.ca",
-        "pharmadrug.co",
-        "pharmather.com",
-        "psybiolife.com",
-        "psyence.com",
-        "redlighttruffles.com",
-        "revivethera.com",
-        "roadmancorp.com",
-        "seelostherapeutics.com",
-        "silopharma.com",
-        "smallpharma.co.uk",
-        "thoughtful-brands.com",
-        "tryptherapeutics.com",
-        "wesanahealth.com",
-        "wuhn.org"
-    ];
+    $companiesArray = array(
+        array('AION', 'aiontherapeutic.com'),
+        array('ABRT','albertlabs.com'),
+        array('AGN','algernonpharmaceuticals.com'),
+        array('ALID','allied.health'),
+        array('ATAI','atai.life'),
+        array('AWKN','awaknlifesciences.com'),
+        array('CSE:PLNT','betterplantsciences.com'),
+        array('BETR','abetterlifepharma.com'),
+        array('BRAX','braxiascientific.com'),
+        array('DRUG','brightmindsbio.com'),
+        array('PWR','captiva-verde.com'),
+        array('CMND','clearmindmedicine.com'),
+        array('CODE','codebase.ventures'),
+        array('CMPS','compasspathways.com'),
+        array('COOL','core1labs.com'),
+        array('CPH','cresopharma.com'),
+        array('CURR','curepharmaceutical.com'),
+        array('CYBN','cybin.com'),
+        array('DELC','deliccorp.com'),
+        array('TMED','theramedhealthcorp.com'),
+        array('EHVVF','ehave.com'),
+        array('CBDT','empowerclinics.com'),
+        array('ENBI','entheonbiomedical.com'),
+        array('ENVB','enveric.com'),
+        array('FTRP','meetfieldtrip.com'),
+        array('FH','filament.health'),
+        array('GHRS','ghres.com'),
+        array('PSYC','globaltracsolutions.com'),
+        array('GDNS','goodnessgrowth.com'),
+        array('GBLC','graphblockchain.com'),
+        array('HAVN','havnlife.com'),
+        array('HOLL','hollistercannabisco.com'),
+        array('MEDI','ketamine.one'),
+        array('LBL','latticebiologics.com'),
+        array('LVT','leviteelabs.com'),
+        array('LOBE','lobesciences.com'),
+        array('MGIC','magicmedindustries.com'),
+        array('MCUR','mindcure.com'),
+        array('MNMD','mindmed.co'),
+        array('MSET','mindsetpharma.com'),
+        array('MYCO','mydecine.com'),
+        array('NEON','neonmindbiosciences.com'),
+        array('SPOR','newwavecorp.com'),
+        array('NOVA','novamentis.ca'),
+        array('NM','novamind.ca'),
+        array('NUMI','numinus.ca'),
+        array('EAT','nutritionalhigh.com'),
+        array('OPTI','optimihealth.ca'),
+        array('PHRX','pharmadrug.co'),
+        array('PHRM','pharmather.com'),
+        array('PSYB','psybiolife.com'),
+        array('PSYG','psyence.com'),
+        array('TRIP','redlighttruffles.com'),
+        array('RVV','revivethera.com'),
+        array('LITT','roadmancorp.com'),
+        array('SEEL','seelostherapeutics.com'),
+        array('SILO','silopharma.com'),
+        array('TSXV: DMT','smallpharma.co.uk'),
+        array('PEMTF','thoughtful-brands.com'),
+        array('TRYP','tryptherapeutics.com'),
+        array('WESA','wesanahealth.com'),
+        array('WUHN','wuhn.orgarray')
+    );
    
+    //initialize iterator for unique ID per div
+    $x = 1;
     foreach($companiesArray as $company)
     {
         echo "<div style='font-size: 12px;'>";
-        echo '<a target= "_blank" href="https://' . $company . '">' . $company . '</a>';
+        echo "<ul>";
+        echo '<li>Website: <a target= "_blank" href="https://' . $company[1] . '">' . $company[1] . '</a></li>';
+        //echo '<li>Company Summary</li>';
+        /*
+        echo '<li>Stock Price (this is going to take WAY TOO Long to load, but you get the idea):
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div id="tradingview_' . $x . '"></div>
+                  <div class="tradingview-widget-copyright">
+                  <a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">' . $company[1] . '</span></a>
+                  by TradingView</div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                  <script type="text/javascript">
+                  new TradingView.widget(
+                  {
+                  "autosize": true,
+                  "symbol": "' . $company[0] . '",
+                  "interval": "D",
+                  "timezone": "Etc/UTC",
+                  "theme": "light",
+                  "style": "1",
+                  "locale": "en",
+                  "toolbar_bg": "#f1f3f6",
+                  "enable_publishing": false,
+                  "allow_symbol_change": true,
+                  "container_id": "tradingview_b34fd"
+                }
+                  );
+                  </script>
+                </div>
+            </li>
+            <!-- TradingView Widget END -->';
+        */
+        //echo '<li>Stock Symbol : ' . $company[0] . '</li>';
+        //echo '<li>Company Logo?</li>';
+        //echo '<li>Filter by Category?</li>';
+        //echo '<li>Filter by Drug Focus?</li>';
+        //echo '<li>Social Media Links?</li>';
+        echo '</ul>';
+        //echo '<hr />';
         echo '</div>';
+        $x++;
     }
 ?>
 
