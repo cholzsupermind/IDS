@@ -28,17 +28,19 @@ $loop = new WP_Query( $args );
 
 ?>
 
-<table style='font-size: 12px; max-width: 98%; margin: 0px 20px;'>
 
-    
+
 <?php
 
 //Open CSV file and dump data
 $row = 1;
+
+$html = "<table style='font-size: 12px; max-width: 98%; margin: 0px 20px;'>";
+
 if (($handle = fopen($filePath, "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         $num = count($data);
-        echo '<tr>';
+        $html .= '<tr>';
         //10 Column CSV
         if($num == 10)
         {
@@ -46,19 +48,19 @@ if (($handle = fopen($filePath, "r")) !== FALSE) {
             {
                 if($row == 1)
                 {
-                    echo '<th>' . $data[$c] . '</th>';
+                    $html .= '<th>' . $data[$c] . '</th>';
                 }
                 else
                 {
                     //USD Format
                     if($c == 2 || $c == 4)
                     {
-                        echo '<td>$' . number_format($data[$c]) . '</td>';                    
+                        $html .= '<td>$' . number_format($data[$c]) . '</td>';                    
                     }
                     //Default format
                     else
                     {
-                        echo '<td>' . $data[$c] . '</td>';
+                        $html .= '<td>' . $data[$c] . '</td>';
                     }
                 }
             }
@@ -71,37 +73,41 @@ if (($handle = fopen($filePath, "r")) !== FALSE) {
             {
                 if($row == 1)
                 {
-                    echo '<th>' . $data[$c] . '</th>';
+                    $html .= '<th>' . $data[$c] . '</th>';
                 }
                 else
                 {
                     //Link
                     if ($c == 1)
                     {
-                        echo '<td><a target="_blank" href="' . $data[$c] . '"</a>' . $data[$c] . '</td>';
+                        $html .= '<td><a target="_blank" href="' . $data[$c] . '"</a>' . $data[$c] . '</td>';
                     }
                     //USD Format
                     elseif($c == 7 || $c == 9 || $c == 10 || $c == 12)
                     {
-                        echo '<td>$' . number_format($data[$c]) . '</td>';                    
+                        $html .= '<td>$' . number_format($data[$c]) . '</td>';                    
                     }
                     //Default format
                     else
                     {
-                        echo '<td>' . $data[$c] . '</td>';
+                        $html .= '<td>' . $data[$c] . '</td>';
                     }
                 }
             }
         }
 
-        echo '</tr>';
+        $html .= '</tr>';
         $row++;
     }
     fclose($handle);
 }
+
+$html .= '</table>';
     
+echo '<p>Number of results: ' . $row . '</p>';
+echo $html;
 ?>
-</table>
+
 </div><!-- .entry-content -->
 </article>
 
