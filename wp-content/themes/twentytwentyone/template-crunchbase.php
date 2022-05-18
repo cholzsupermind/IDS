@@ -39,30 +39,61 @@ if (($handle = fopen($filePath, "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         $num = count($data);
         echo '<tr>';
-        for ($c = 0; $c < $num; $c++) {
-            if($row == 1)
+        //10 Column CSV
+        if($num == 10)
+        {
+            for ($c = 0; $c < $num; $c++)
             {
-                echo '<th>' . $data[$c] . '</th>';
-            }
-            else
-            {
-                //Link
-                if ($c == 1)
+                if($row == 1)
                 {
-                    echo '<td><a href="' . $data[$c] . '"</a>' . $data[$c] . '</td>';
+                    echo '<th>' . $data[$c] . '</th>';
                 }
-                //USD Format
-                elseif($c == 7 || $c == 9 || $c == 10 || $c == 12)
-                {
-                    echo '<td>$' . number_format($data[$c]) . '</td>';                    
-                }
-                //Default format
                 else
                 {
-                    echo '<td>' . $data[$c] . '</td>';
+                    //USD Format
+                    if($c == 2 || $c == 4)
+                    {
+                        echo '<td>$' . number_format($data[$c]) . '</td>';                    
+                    }
+                    //Default format
+                    else
+                    {
+                        echo '<td>' . $data[$c] . '</td>';
+                    }
                 }
             }
         }
+        
+        //13 column CSV
+        elseif($num == 13)
+        {           
+            for ($c = 0; $c < $num; $c++)
+            {
+                if($row == 1)
+                {
+                    echo '<th>' . $data[$c] . '</th>';
+                }
+                else
+                {
+                    //Link
+                    if ($c == 1)
+                    {
+                        echo '<td><a target="_blank" href="' . $data[$c] . '"</a>' . $data[$c] . '</td>';
+                    }
+                    //USD Format
+                    elseif($c == 7 || $c == 9 || $c == 10 || $c == 12)
+                    {
+                        echo '<td>$' . number_format($data[$c]) . '</td>';                    
+                    }
+                    //Default format
+                    else
+                    {
+                        echo '<td>' . $data[$c] . '</td>';
+                    }
+                }
+            }
+        }
+
         echo '</tr>';
         $row++;
     }
