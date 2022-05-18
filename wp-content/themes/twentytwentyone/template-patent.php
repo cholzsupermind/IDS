@@ -4,7 +4,7 @@
 
 get_header();
 
-$filePath = "wp-content/themes/twentytwentyone/" . $post->post_name . ".csv";
+$filePath = "wp-content/csv/" . $post->post_name . ".csv";
 ?>
 
 

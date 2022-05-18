@@ -82,9 +82,8 @@ get_header();
     {
         echo "<div style='font-size: 12px;'>";
         echo "<ul>";
-        echo '<li>Website: <a target= "_blank" href="https://' . $company[1] . '">' . $company[1] . '</a></li>';
+        echo '<li>Website: <a rel="noopener noreferrer" target="_blank" href="https://' . $company[1] . '">' . $company[1] . '</a></li>';
         //echo '<li>Company Summary</li>';
-        /*
         echo '<li>Stock Price (this is going to take WAY TOO Long to load, but you get the idea):
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
@@ -113,14 +112,13 @@ get_header();
                 </div>
             </li>
             <!-- TradingView Widget END -->';
-        */
-        //echo '<li>Stock Symbol : ' . $company[0] . '</li>';
-        //echo '<li>Company Logo?</li>';
-        //echo '<li>Filter by Category?</li>';
-        //echo '<li>Filter by Drug Focus?</li>';
-        //echo '<li>Social Media Links?</li>';
+        echo '<li>Stock Symbol : ' . $company[0] . '</li>';
+        echo '<li>Company Logo?</li>';
+        echo '<li>Filter by Category?</li>';
+        echo '<li>Filter by Drug Focus?</li>';
+        echo '<li>Social Media Links?</li>';
         echo '</ul>';
-        //echo '<hr />';
+        echo '<hr />';
         echo '</div>';
         $x++;
     }
