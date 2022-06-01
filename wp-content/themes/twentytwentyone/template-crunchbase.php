@@ -7,7 +7,6 @@ get_header();
 $filePath = "wp-content/csv/" . $post->post_name . ".csv";
 ?>
 
-
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <div class="entry-content">
     <h2><?=get_the_title(); ?></h2>
@@ -26,12 +25,6 @@ $args = array(
 
 $loop = new WP_Query( $args ); 
 
-?>
-
-
-
-<?php
-
 //Open CSV file and dump data
 $row = 1;
 
@@ -40,62 +33,31 @@ $html = "<table style='font-size: 12px; max-width: 98%; margin: 0px 20px;'>";
 if (($handle = fopen($filePath, "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         $num = count($data);
+
         $html .= '<tr>';
-        //10 Column CSV
-        if($num == 10)
+        for ($c = 0; $c < $num; $c++)
         {
-            for ($c = 0; $c < $num; $c++)
+            //Cut down length of paragraph on FULL DESCRIPTION to 100 characters
+            if(strlen($data[$c]) > 50)
             {
-                if($row == 1)
-                {
-                    $html .= '<th>' . $data[$c] . '</th>';
-                }
-                else
-                {
-                    //USD Format
-                    if($c == 2 || $c == 4)
-                    {
-                        $html .= '<td>$' . number_format($data[$c]) . '</td>';                    
-                    }
-                    //Default format
-                    else
-                    {
-                        $html .= '<td>' . $data[$c] . '</td>';
-                    }
-                }
+                $data[$c] = substr($data[$c], 0, 50) . '...';
             }
+            
+            //Create links if detect http or https
+            if (strpos($data[$c], "http") === 0 || strpos($data[$c], "https") === 0)
+            {
+                $data[$c] = '<a href="' . $data[$c] . '" > ' . $data[$c] . '</a>';
+            }
+            
+            //if data value is numeric AND greater than 5 digits?  Then add money format
+            if(is_numeric($data[$c]) && strlen($data[$c]) > 3)
+            {
+                $data[$c] = '$' . number_format($data[$c]);
+            }
+            
+            $html .= '<td>' . $data[$c] . '</td>';
         }
         
-        //13 column CSV
-        elseif($num == 13)
-        {           
-            for ($c = 0; $c < $num; $c++)
-            {
-                if($row == 1)
-                {
-                    $html .= '<th>' . $data[$c] . '</th>';
-                }
-                else
-                {
-                    //Link
-                    if ($c == 1)
-                    {
-                        $html .= '<td><a target="_blank" href="' . $data[$c] . '"</a>' . $data[$c] . '</td>';
-                    }
-                    //USD Format
-                    elseif($c == 7 || $c == 9 || $c == 10 || $c == 12)
-                    {
-                        $html .= '<td>$' . number_format($data[$c]) . '</td>';                    
-                    }
-                    //Default format
-                    else
-                    {
-                        $html .= '<td>' . $data[$c] . '</td>';
-                    }
-                }
-            }
-        }
-
         $html .= '</tr>';
         $row++;
     }
