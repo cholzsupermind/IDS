@@ -30,19 +30,6 @@ $filePath = "wp-content/csv/" . $post->post_name . ".csv";
     <div class="outerDiv">
         <h2><?=get_the_title(); ?></h2>
 <?php
-    query_posts(array(
-   'post_type' => 'patents'
-));
-
-$args = array(  
-    'post_type' => 'patents',
-    'post_status' => 'publish',
-    'posts_per_page' => 8, 
-    'orderby' => 'title', 
-    'order' => 'DESC', 
-);
-
-$loop = new WP_Query( $args ); 
 
 //Open CSV file and dump data
 if (($handle = fopen($filePath, "r")) !== FALSE)
