@@ -30,12 +30,12 @@ foreach($jobResults as $job)
 {
     $html .= '<div>';
     $html .= '<ul>';
-    $html .= '<li>' . $job->name . '</li>';
-    $html .= '<li>Currently Hiring : ' . $job->actively_hiring . '</li>';
-    $html .= '<li>' . $job->headquarters_location . '</li>';
-    $html .= '<li><a href="' . $job->website . ' target="_blank">' . $job->website . '</a></li>';
-    $html .= '<li><a href="mailto:' . $job->contact_email .'">' . $job->contact_email . '</a></li>';
-    $html .= '<li><a href="tel:' . $job->phone_number .'">' . $job->phone_number . '</a></li>';
+    $html .= '<li>' . dataCheck($job->name) . '</li>';
+    $html .= '<li>Currently Hiring : ' . dataCheck($job->actively_hiring) . '</li>';
+    $html .= '<li>' . dataCheck($job->headquarters_location) . '</li>';
+    $html .= '<li><a href="' . dataCheck($job->website) . ' target="_blank">' . dataCheck($job->website) . '</a></li>';
+    $html .= '<li>' . dataCheckMail($job->contact_email) . '</li>';
+    $html .= '<li>' . dataCheckPhone($job->phone_number) . '</li>';
     $html .= '</ul>';
     $html .= '</div>';
     $html .= '<hr>';

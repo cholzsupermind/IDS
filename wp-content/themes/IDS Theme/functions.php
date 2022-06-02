@@ -54,4 +54,38 @@ function cw_post_type_patents() {
 add_action('init', 'cw_post_type_patents');
 /*Custom Post type end*/
 
+function dataCheck($data)
+{
+    if(empty($data))
+    {
+        $data = "No Data Available";
+    }
+    return $data;
+}
+
+function dataCheckPhone($data)
+{
+    if(empty($data))
+    {
+        $data = "No Data Available";
+    }
+    else
+    {
+        $data = '<a href="tel:' . $data .'">' . $data . '</a>';
+    }
+    return $data;
+}
+
+function dataCheckMail($data)
+{
+    if(empty($data))
+    {
+        $data = "No Data Available";
+    }
+    else
+    {
+        $data = '<a target="_blank" href="mailto:' . $data .'">' . $data . '</a>';
+    }
+    return $data;
+}
 ?>

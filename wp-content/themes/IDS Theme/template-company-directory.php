@@ -120,21 +120,21 @@ $companiesResults = $wpdb->get_results( $query . " ORDER BY name LIMIT ${offset}
     {
         $html .= "<div style='font-size: 12px;'>";
         $html .= "<ul>";
-        $html .= '<li>Website: <a rel="noopener noreferrer" target="_blank" href="https://' . $company->url . '">' . $company->url . '</a></li>';
+        $html .= '<li>Website: <a rel="noopener noreferrer" target="_blank" href="https://' . dataCheck($company->url) . '">' . dataCheck($company->url) . '</a></li>';
         //$html .= '<li>Company Summary</li>';
         $html .= '<li>Stock Price (this is going to take WAY TOO Long to load, but you get the idea):
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                   <div id="tradingview_' . $x . '"></div>
                   <div class="tradingview-widget-copyright">
-                  <a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">' . $company->url . '</span></a>
+                  <a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">' . dataCheck($company->url) . '</span></a>
                   by TradingView</div>
                   <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                   <script type="text/javascript">
                   new TradingView.widget(
                   {
                   "autosize": true,
-                  "symbol": "' . $company->sybmol . '",
+                  "symbol": "' . dataCheck($company->sybmol) . '",
                   "interval": "D",
                   "timezone": "Etc/UTC",
                   "theme": "light",
@@ -150,8 +150,8 @@ $companiesResults = $wpdb->get_results( $query . " ORDER BY name LIMIT ${offset}
                 </div>
             </li>
             <!-- TradingView Widget END -->';
-        $html .= '<li>Stock Symbol : ' . $company->symbol . '</li>';
-        $html .= '<li>Company Name : ' . $company->name . '</li>';
+        $html .= '<li>Stock Symbol : ' . dataCheck($company->symbol) . '</li>';
+        $html .= '<li>Company Name : ' . dataCheck($company->name) . '</li>';
         $html .= '<li>Filter by Category?</li>';
         $html .= '<li>Filter by Drug Focus?</li>';
         $html .= '<li>Social Media Links?</li>';

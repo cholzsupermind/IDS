@@ -7,6 +7,8 @@ get_header();
 global $wpdb;
 $tableName = 'organizations';	
 
+
+//Put all of this into functions file
 $query = "SELECT * FROM " . $tableName;
 
 $total_query = "SELECT COUNT(1) FROM (${query}) AS combined_table";
@@ -42,8 +44,8 @@ $organizationResults = $wpdb->get_results( $query . " ORDER BY name LIMIT ${offs
     
 </style>
 
-<?php
-
+ <?php
+ 
     $pagination = paginate_links( array(
         'base' => add_query_arg( 'cpage', '%#%' ),
         'format' => '',
@@ -57,40 +59,40 @@ $organizationResults = $wpdb->get_results( $query . " ORDER BY name LIMIT ${offs
     {
         $html .= '<div>';
         $html .= '<ul>';
-        $html .= '<li><span>Organization Name : </span>' . $organization->name . '</li>';
-        $html .= '<li><span>URL : </span>' . $organization->name_url . '</li>';
-        $html .= '<li><span>Industries : </span>' . $organization->industries . '</li>';
-        $html .= '<li><span>Headquarters Location : </span>' . $organization->headquarters_location . '</li>';
-        $html .= '<li><span>Description : </span>' . $organization->description . '</li>';
-        $html .= '<li><span>CB Rank: : </span>' . $organization->cb_rank . '</li>';
-        $html .= '<li><span>Number of Funding Rounds : </span>' . $organization->num_funding_rounds . '</li>';
-        $html .= '<li><span>Last Funding Amount : </span>' . $organization->last_fund_amount . '</li>';
-        $html .= '<li><span>Last Funding Amount Currency  : </span>' . $organization->last_fund_amount_currency . '</li>';
-        $html .= '<li><span>Last Funding Amount Currency (in USD) : </span>' . $organization->last_fund_amount_currency_usd . '</li>';
-        $html .= '<li><span>Total Funding Amount : </span>' . $organization->total_fund_amount . '</li>';
-        $html .= '<li><span>Total Funding Amount Currency  : </span>' . $organization->total_fund_amount_curency . '</li>';
-        $html .= '<li><span>Total Funding Amount Currency (in USD) : </span>' . $organization->total_fund_amount_currency_usd . '</li>';
-        $html .= '<li><span>Headquarters Regions : </span>' . $organization->headquarters_regions . '</li>';
-        $html .= '<li><span>Diversity Spotlight (US Only) : </span>' . $organization->diversity_spotlight . '</li>';
-        $html .= '<li><span>Estimated Revenue Range : </span>' . $organization->estimated_revenue_range . '</li>';
-        $html .= '<li><span>Operating Status : </span>' . $organization->operating_status . '</li>';
-        $html .= '<li><span>Founded Date : </span>' . $organization->founded_date . '</li>';        
-        $html .= '<li><span>Founded Date Precision  : </span>' . $organization->founded_date_precision . '</li>';               
-        $html .= '<li><span>Exit Date : </span>' . $organization->exit_date . '</li>';        
-        $html .= '<li><span>Exit Date Precision  : </span>' . $organization->exit_date_precision . '</li>';
-        $html .= '<li><span>Closed Date : </span>' . $organization->closed_date . '</li>';        
-        $html .= '<li><span>Closed Date Precision : </span>' . $organization->closed_date_precision . '</li>';
-        $html .= '<li><span>Company Type : </span>' . $organization->company_type . '</li>';
-        $html .= '<li><span>Website : </span>' . $organization->website . '</li>';
-        $html .= '<li><span>Twitter : </span>' . $organization->twitter . '</li>';
-        $html .= '<li><span>Facebook : </span>' . $organization->facebook . '</li>';
-        $html .= '<li><span>LinkedIn : </span>' . $organization->linkedin . '</li>';
-        $html .= '<li><span>Contact Email : </span>' . $organization->contact_email . '</li>';
-        $html .= '<li><span>Phone Number : </span>' . $organization->phone_number . '</li>';
-        $html .= '<li><span>Number of Articles : </span>' . $organization->num_articles . '</li>';
-        $html .= '<li><span>Hub Tags : </span>' . $organization->hub_tags . '</li>';
-        $html .= '<li><span>Full Description : </span>' . $organization->full_description . '</li>';
-        $html .= '<li><span>Actively Hiring : </span>' . $organization->actively_hiring . '</li>';
+        $html .= '<li><span>Organization Name : </span>' . dataCheck($organization->name) . '</li>';
+        $html .= '<li><span>URL : </span>' . dataCheck($organization->name_url) . '</li>';
+        $html .= '<li><span>Industries : </span>' . dataCheck($organization->industries) . '</li>';
+        $html .= '<li><span>Headquarters Location : </span>' . dataCheck($organization->headquarters_location) . '</li>';
+        $html .= '<li><span>Description : </span>' . dataCheck($organization->description) . '</li>';
+        $html .= '<li><span>CB Rank: : </span>' . dataCheck($organization->cb_rank) . '</li>';
+        $html .= '<li><span>Number of Funding Rounds : </span>' . dataCheck($organization->num_funding_rounds) . '</li>';
+        $html .= '<li><span>Last Funding Amount : </span>' . dataCheck($organization->last_fund_amount) . '</li>';
+        $html .= '<li><span>Last Funding Amount Currency  : </span>' . dataCheck($organization->last_fund_amount_currency) . '</li>';
+        $html .= '<li><span>Last Funding Amount Currency (in USD) : </span>' . dataCheck($organization->last_fund_amount_currency_usd) . '</li>';
+        $html .= '<li><span>Total Funding Amount : </span>' . dataCheck($organization->total_fund_amount) . '</li>';
+        $html .= '<li><span>Total Funding Amount Currency  : </span>' . dataCheck($organization->total_fund_amount_curency) . '</li>';
+        $html .= '<li><span>Total Funding Amount Currency (in USD) : </span>' . dataCheck($organization->total_fund_amount_currency_usd) . '</li>';
+        $html .= '<li><span>Headquarters Regions : </span>' . dataCheck($organization->headquarters_regions) . '</li>';
+        $html .= '<li><span>Diversity Spotlight (US Only) : </span>' . dataCheck($organization->diversity_spotlight) . '</li>';
+        $html .= '<li><span>Estimated Revenue Range : </span>' . dataCheck($organization->estimated_revenue_range) . '</li>';
+        $html .= '<li><span>Operating Status : </span>' . dataCheck($organization->operating_status) . '</li>';
+        $html .= '<li><span>Founded Date : </span>' . dataCheck($organization->founded_date) . '</li>';        
+        $html .= '<li><span>Founded Date Precision  : </span>' . dataCheck($organization->founded_date_precision) . '</li>';               
+        $html .= '<li><span>Exit Date : </span>' . dataCheck($organization->exit_date) . '</li>';        
+        $html .= '<li><span>Exit Date Precision  : </span>' . dataCheck($organization->exit_date_precision) . '</li>';
+        $html .= '<li><span>Closed Date : </span>' . dataCheck($organization->closed_date) . '</li>';        
+        $html .= '<li><span>Closed Date Precision : </span>' . dataCheck($organization->closed_date_precision) . '</li>';
+        $html .= '<li><span>Company Type : </span>' . dataCheck($organization->company_type) . '</li>';
+        $html .= '<li><span>Website : </span>' . dataCheck($organization->website) . '</li>';
+        $html .= '<li><span>Twitter : </span>' . dataCheck($organization->twitter) . '</li>';
+        $html .= '<li><span>Facebook : </span>' . dataCheck($organization->facebook) . '</li>';
+        $html .= '<li><span>LinkedIn : </span>' . dataCheck($organization->linkedin) . '</li>';
+        $html .= '<li><span>Contact Email : </span>' . dataCheck($organization->contact_email) . '</li>';
+        $html .= '<li><span>Phone Number : </span>' . dataCheck($organization->phone_number) . '</li>';
+        $html .= '<li><span>Number of Articles : </span>' . dataCheck($organization->num_articles) . '</li>';
+        $html .= '<li><span>Hub Tags : </span>' . dataCheck($organization->hub_tags) . '</li>';
+        $html .= '<li><span>Full Description : </span>' . dataCheck($organization->full_description) . '</li>';
+        $html .= '<li><span>Actively Hiring : </span>' . dataCheck($organization->actively_hiring) . '</li>';
         $html .= '</ul>';
         $html .= '</div>';
         $html .= '<hr>';  
